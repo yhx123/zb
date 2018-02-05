@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lsjs.zb.dao.ServerMapper" >
+  <resultMap id="BaseResultMap" type="com.lsjs.zb.pojo.Server" >
+    <constructor >
+      <idArg column="server_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="server_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="server_description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="server_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="check_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="server_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="server_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="server_latitude" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="server_longitude" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="server_img" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    server_id, server_title, server_description, price, server_time, check_status, server_status, 
+    server_type, server_latitude, server_longitude, create_time, update_time, server_img
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lsjs.zb.pojo.ServerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from server
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from server
+    where server_id = #{serverId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from server
+    where server_id = #{serverId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lsjs.zb.pojo.ServerExample" >
+    delete from server
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lsjs.zb.pojo.Server" >
+    insert into server (server_id, server_title, server_description, 
+      price, server_time, check_status, 
+      server_status, server_type, server_latitude, 
+      server_longitude, create_time, update_time, 
+      server_img)
+    values (#{serverId,jdbcType=INTEGER}, #{serverTitle,jdbcType=VARCHAR}, #{serverDescription,jdbcType=VARCHAR}, 
+      #{price,jdbcType=BIGINT}, #{serverTime,jdbcType=BIGINT}, #{checkStatus,jdbcType=INTEGER}, 
+      #{serverStatus,jdbcType=INTEGER}, #{serverType,jdbcType=INTEGER}, #{serverLatitude,jdbcType=VARCHAR}, 
+      #{serverLongitude,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{serverImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lsjs.zb.pojo.Server" >
+    insert into server
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serverId != null" >
+        server_id,
+      </if>
+      <if test="serverTitle != null" >
+        server_title,
+      </if>
+      <if test="serverDescription != null" >
+        server_description,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="serverTime != null" >
+        server_time,
+      </if>
+      <if test="checkStatus != null" >
+        check_status,
+      </if>
+      <if test="serverStatus != null" >
+        server_status,
+      </if>
+      <if test="serverType != null" >
+        server_type,
+      </if>
+      <if test="serverLatitude != null" >
+        server_latitude,
+      </if>
+      <if test="serverLongitude != null" >
+        server_longitude,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="serverImg != null" >
+        server_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serverId != null" >
+        #{serverId,jdbcType=INTEGER},
+      </if>
+      <if test="serverTitle != null" >
+        #{serverTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="serverDescription != null" >
+        #{serverDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=BIGINT},
+      </if>
+      <if test="serverTime != null" >
+        #{serverTime,jdbcType=BIGINT},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="serverStatus != null" >
+        #{serverStatus,jdbcType=INTEGER},
+      </if>
+      <if test="serverType != null" >
+        #{serverType,jdbcType=INTEGER},
+      </if>
+      <if test="serverLatitude != null" >
+        #{serverLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="serverLongitude != null" >
+        #{serverLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serverImg != null" >
+        #{serverImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lsjs.zb.pojo.ServerExample" resultType="java.lang.Integer" >
+    select count(*) from server
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update server
+    <set >
+      <if test="record.serverId != null" >
+        server_id = #{record.serverId,jdbcType=INTEGER},
+      </if>
+      <if test="record.serverTitle != null" >
+        server_title = #{record.serverTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverDescription != null" >
+        server_description = #{record.serverDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=BIGINT},
+      </if>
+      <if test="record.serverTime != null" >
+        server_time = #{record.serverTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.checkStatus != null" >
+        check_status = #{record.checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.serverStatus != null" >
+        server_status = #{record.serverStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.serverType != null" >
+        server_type = #{record.serverType,jdbcType=INTEGER},
+      </if>
+      <if test="record.serverLatitude != null" >
+        server_latitude = #{record.serverLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverLongitude != null" >
+        server_longitude = #{record.serverLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.serverImg != null" >
+        server_img = #{record.serverImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update server
+    set server_id = #{record.serverId,jdbcType=INTEGER},
+      server_title = #{record.serverTitle,jdbcType=VARCHAR},
+      server_description = #{record.serverDescription,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=BIGINT},
+      server_time = #{record.serverTime,jdbcType=BIGINT},
+      check_status = #{record.checkStatus,jdbcType=INTEGER},
+      server_status = #{record.serverStatus,jdbcType=INTEGER},
+      server_type = #{record.serverType,jdbcType=INTEGER},
+      server_latitude = #{record.serverLatitude,jdbcType=VARCHAR},
+      server_longitude = #{record.serverLongitude,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      server_img = #{record.serverImg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsjs.zb.pojo.Server" >
+    update server
+    <set >
+      <if test="serverTitle != null" >
+        server_title = #{serverTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="serverDescription != null" >
+        server_description = #{serverDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=BIGINT},
+      </if>
+      <if test="serverTime != null" >
+        server_time = #{serverTime,jdbcType=BIGINT},
+      </if>
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="serverStatus != null" >
+        server_status = #{serverStatus,jdbcType=INTEGER},
+      </if>
+      <if test="serverType != null" >
+        server_type = #{serverType,jdbcType=INTEGER},
+      </if>
+      <if test="serverLatitude != null" >
+        server_latitude = #{serverLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="serverLongitude != null" >
+        server_longitude = #{serverLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serverImg != null" >
+        server_img = #{serverImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where server_id = #{serverId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lsjs.zb.pojo.Server" >
+    update server
+    set server_title = #{serverTitle,jdbcType=VARCHAR},
+      server_description = #{serverDescription,jdbcType=VARCHAR},
+      price = #{price,jdbcType=BIGINT},
+      server_time = #{serverTime,jdbcType=BIGINT},
+      check_status = #{checkStatus,jdbcType=INTEGER},
+      server_status = #{serverStatus,jdbcType=INTEGER},
+      server_type = #{serverType,jdbcType=INTEGER},
+      server_latitude = #{serverLatitude,jdbcType=VARCHAR},
+      server_longitude = #{serverLongitude,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      server_img = #{serverImg,jdbcType=VARCHAR}
+    where server_id = #{serverId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="../img/favicon.html">
+
+    <title>众帮</title>
+
+    <!--我的start-->
+
+    <!--<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+    <script src="gethtml.js"></script>
+
+    <link href="../mycss/mycss.css">
+
+
+
+    <!--我的end-->
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/style-responsive.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<section id="container" class="">
+    <!--header start-->
+    <header class="header white-bg">
+        <div class="sidebar-toggle-box">
+            <div data-original-title="" data-placement="right" class="icon-reorder tooltips"></div>
+        </div>
+        <!--logo start-->
+        <a href="#" class="logo">众<span>帮</span></a>
+        <!--logo end-->
+
+        <div class="top-nav ">
+            <ul class="nav pull-right top-menu">
+                <!-- user login dropdown start-->
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <img alt="" src="http://zhongbangapp.oss-cn-beijing.aliyuncs.com/defaultUserImage.png" style="width: 29px;height: 29px;">
+                        <span class="username">Admin</span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu extended logout">
+                        <div class="log-arrow-up"></div>
+                        <!--<li><a href="#"><i class=" icon-suitcase"></i>记录</a></li>
+                        <li><a href="#"><i class="icon-cog"></i> 设置</a></li>
+                        <li><a href="#"><i class="icon-bell-alt"></i> 通知</a></li>-->
+                        <li><a href="../login.html"><i class="icon-key"></i> 退出登陆</a></li>
+                    </ul>
+                </li>
+                <!-- user login dropdown end -->
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar"  class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu">
+
+                <li class="sub-menu active">
+                    <a href="javascript:;" class="">
+                        <i class="icon-tasks"></i>
+                        <span>举报</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="../report_server/report_server.html">服务</a></li>
+                        <li><a class="" href="../report_need/report_need.html">需求</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu active">
+                    <a href="javascript:;" class="">
+                        <i class="icon-th"></i>
+                        <span>审核</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="../server_check/server_table.html">服务</a></li>
+                        <li class="active"><a class="" href="#">需求</a></li>
+
+                    </ul>
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            审核
+                        </header>
+                        <table class="table table-striped border-top" id="sample_1">
+                            <thead>
+                            <tr>
+                                <th style="width:8px;"><input type="checkbox" class="group-checkable"
+                                                              data-set="#sample_1 .checkboxes"/></th>
+                                <th>手机号</th>
+                                <th class="hidden-phone">标题</th>
+                                <th class="hidden-phone">内容</th>
+                                <th class="hidden-phone">时间</th>
+                                <th class="hidden-phone">审核状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <script src="appendes.js">
+
+                            </script>
+
+
+
+                           <!-- node  start
+                            <tr class="odd gradeX">
+                                <td><input type="checkbox" class="checkboxes" value="1"/></td>
+
+                                <td>手机号</td>
+                                <td class="hidden-phone">标题</td>
+
+                                详细内容start
+                                <td class="hidden-phone">
+                                    <div class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                            <span class="username">详细内容</span>
+                                            <b class="caret"></b>
+                                        </a>
+                                        <div class="dropdown-menu extended logout">
+                                            具体的详细内容
+                                            <img src="../img/hello.jpg" style="padding-left: 10%; width: 90%"/><p></p>
+                                            <img src="../img/hello.jpg" style="padding-left: 10%; width: 90%"/>
+                                        </div>
+                                    </div>
+                                </td>
+                                详细内容end
+
+                                时间start
+                                <td class="center hidden-phone">2017.11.3</td>
+                                时间end
+
+                                审核start
+                                <td class="hidden-phone">
+                                    <span class="label label-info">待审核</span>
+                                    <a href="#" class="tooltip-test" data-toggle="tooltip" title="通过">
+                                        <button class="btn btn-success btn-xs"><i class="icon-ok"></i></button>
+                                    </a>
+
+                                    <a href="#" class="tooltip-test" data-toggle="tooltip" title="不通过">
+                                        <button class="btn btn-danger btn-xs"><i class="icon-remove"></i></button>
+                                    </a>
+
+                                    <a href="#" class="tooltip-test" data-toggle="tooltip" title="待审核">
+                                        <button class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
+                                    </a>
+                                </td>
+                                审核end
+                            </tr>
+                            node end
+-->
+
+
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.scrollTo.min.js"></script>
+<script src="../js/jquery.nicescroll.js" type="text/javascript"></script>
+<script type="text/javascript" src="../assets/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../assets/data-tables/DT_bootstrap.js"></script>
+
+
+<!--common script for all pages-->
+<script src="../js/common-scripts.js"></script>
+
+<!--script for this page only-->
+<script src="../js/dynamic-table.js"></script>
+
+
+</body>
+</html>

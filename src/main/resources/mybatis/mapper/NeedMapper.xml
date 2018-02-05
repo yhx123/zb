@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lsjs.zb.dao.NeedMapper" >
+  <resultMap id="BaseResultMap" type="com.lsjs.zb.pojo.Need" >
+    <constructor >
+      <idArg column="need_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="need_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="need_description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reward" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="longitude" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="latitude" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="need_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="goods_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="check_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="need_img" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="need_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    need_id, need_title, need_description, reward, longitude, latitude, need_type, create_time, 
+    update_time, goods_status, check_status, need_img, need_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lsjs.zb.pojo.NeedExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from need
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from need
+    where need_id = #{needId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from need
+    where need_id = #{needId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lsjs.zb.pojo.NeedExample" >
+    delete from need
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lsjs.zb.pojo.Need" >
+    insert into need (need_id, need_title, need_description, 
+      reward, longitude, latitude, 
+      need_type, create_time, update_time, 
+      goods_status, check_status, need_img, 
+      need_time)
+    values (#{needId,jdbcType=INTEGER}, #{needTitle,jdbcType=VARCHAR}, #{needDescription,jdbcType=VARCHAR}, 
+      #{reward,jdbcType=BIGINT}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{needType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{goodsStatus,jdbcType=INTEGER}, #{checkStatus,jdbcType=INTEGER}, #{needImg,jdbcType=VARCHAR}, 
+      #{needTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lsjs.zb.pojo.Need" >
+    insert into need
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="needId != null" >
+        need_id,
+      </if>
+      <if test="needTitle != null" >
+        need_title,
+      </if>
+      <if test="needDescription != null" >
+        need_description,
+      </if>
+      <if test="reward != null" >
+        reward,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="needType != null" >
+        need_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="goodsStatus != null" >
+        goods_status,
+      </if>
+      <if test="checkStatus != null" >
+        check_status,
+      </if>
+      <if test="needImg != null" >
+        need_img,
+      </if>
+      <if test="needTime != null" >
+        need_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="needId != null" >
+        #{needId,jdbcType=INTEGER},
+      </if>
+      <if test="needTitle != null" >
+        #{needTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="needDescription != null" >
+        #{needDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="reward != null" >
+        #{reward,jdbcType=BIGINT},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="needType != null" >
+        #{needType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsStatus != null" >
+        #{goodsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="needImg != null" >
+        #{needImg,jdbcType=VARCHAR},
+      </if>
+      <if test="needTime != null" >
+        #{needTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lsjs.zb.pojo.NeedExample" resultType="java.lang.Integer" >
+    select count(*) from need
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update need
+    <set >
+      <if test="record.needId != null" >
+        need_id = #{record.needId,jdbcType=INTEGER},
+      </if>
+      <if test="record.needTitle != null" >
+        need_title = #{record.needTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needDescription != null" >
+        need_description = #{record.needDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reward != null" >
+        reward = #{record.reward,jdbcType=BIGINT},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needType != null" >
+        need_type = #{record.needType,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.goodsStatus != null" >
+        goods_status = #{record.goodsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkStatus != null" >
+        check_status = #{record.checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.needImg != null" >
+        need_img = #{record.needImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needTime != null" >
+        need_time = #{record.needTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update need
+    set need_id = #{record.needId,jdbcType=INTEGER},
+      need_title = #{record.needTitle,jdbcType=VARCHAR},
+      need_description = #{record.needDescription,jdbcType=VARCHAR},
+      reward = #{record.reward,jdbcType=BIGINT},
+      longitude = #{record.longitude,jdbcType=VARCHAR},
+      latitude = #{record.latitude,jdbcType=VARCHAR},
+      need_type = #{record.needType,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      goods_status = #{record.goodsStatus,jdbcType=INTEGER},
+      check_status = #{record.checkStatus,jdbcType=INTEGER},
+      need_img = #{record.needImg,jdbcType=VARCHAR},
+      need_time = #{record.needTime,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsjs.zb.pojo.Need" >
+    update need
+    <set >
+      <if test="needTitle != null" >
+        need_title = #{needTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="needDescription != null" >
+        need_description = #{needDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="reward != null" >
+        reward = #{reward,jdbcType=BIGINT},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="needType != null" >
+        need_type = #{needType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodsStatus != null" >
+        goods_status = #{goodsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="needImg != null" >
+        need_img = #{needImg,jdbcType=VARCHAR},
+      </if>
+      <if test="needTime != null" >
+        need_time = #{needTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where need_id = #{needId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lsjs.zb.pojo.Need" >
+    update need
+    set need_title = #{needTitle,jdbcType=VARCHAR},
+      need_description = #{needDescription,jdbcType=VARCHAR},
+      reward = #{reward,jdbcType=BIGINT},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      need_type = #{needType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      goods_status = #{goodsStatus,jdbcType=INTEGER},
+      check_status = #{checkStatus,jdbcType=INTEGER},
+      need_img = #{needImg,jdbcType=VARCHAR},
+      need_time = #{needTime,jdbcType=BIGINT}
+    where need_id = #{needId,jdbcType=INTEGER}
+  </update>
+</mapper>

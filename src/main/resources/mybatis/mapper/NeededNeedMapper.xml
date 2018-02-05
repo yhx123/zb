@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lsjs.zb.dao.NeededNeedMapper" >
+  <resultMap id="BaseResultMap" type="com.lsjs.zb.pojo.NeededNeed" >
+    <constructor >
+      <idArg column="needed_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="need_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="needed_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="needed_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="needed_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    needed_id, need_id, user_id, needed_name, needed_address, needed_phone
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lsjs.zb.pojo.NeededNeedExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from needed_need
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from needed_need
+    where needed_id = #{neededId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from needed_need
+    where needed_id = #{neededId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lsjs.zb.pojo.NeededNeedExample" >
+    delete from needed_need
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lsjs.zb.pojo.NeededNeed" >
+    insert into needed_need (needed_id, need_id, user_id, 
+      needed_name, needed_address, needed_phone
+      )
+    values (#{neededId,jdbcType=INTEGER}, #{needId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{neededName,jdbcType=VARCHAR}, #{neededAddress,jdbcType=VARCHAR}, #{neededPhone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lsjs.zb.pojo.NeededNeed" >
+    insert into needed_need
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="neededId != null" >
+        needed_id,
+      </if>
+      <if test="needId != null" >
+        need_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="neededName != null" >
+        needed_name,
+      </if>
+      <if test="neededAddress != null" >
+        needed_address,
+      </if>
+      <if test="neededPhone != null" >
+        needed_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="neededId != null" >
+        #{neededId,jdbcType=INTEGER},
+      </if>
+      <if test="needId != null" >
+        #{needId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="neededName != null" >
+        #{neededName,jdbcType=VARCHAR},
+      </if>
+      <if test="neededAddress != null" >
+        #{neededAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="neededPhone != null" >
+        #{neededPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lsjs.zb.pojo.NeededNeedExample" resultType="java.lang.Integer" >
+    select count(*) from needed_need
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update needed_need
+    <set >
+      <if test="record.neededId != null" >
+        needed_id = #{record.neededId,jdbcType=INTEGER},
+      </if>
+      <if test="record.needId != null" >
+        need_id = #{record.needId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.neededName != null" >
+        needed_name = #{record.neededName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.neededAddress != null" >
+        needed_address = #{record.neededAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.neededPhone != null" >
+        needed_phone = #{record.neededPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update needed_need
+    set needed_id = #{record.neededId,jdbcType=INTEGER},
+      need_id = #{record.needId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      needed_name = #{record.neededName,jdbcType=VARCHAR},
+      needed_address = #{record.neededAddress,jdbcType=VARCHAR},
+      needed_phone = #{record.neededPhone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lsjs.zb.pojo.NeededNeed" >
+    update needed_need
+    <set >
+      <if test="needId != null" >
+        need_id = #{needId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="neededName != null" >
+        needed_name = #{neededName,jdbcType=VARCHAR},
+      </if>
+      <if test="neededAddress != null" >
+        needed_address = #{neededAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="neededPhone != null" >
+        needed_phone = #{neededPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where needed_id = #{neededId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lsjs.zb.pojo.NeededNeed" >
+    update needed_need
+    set need_id = #{needId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      needed_name = #{neededName,jdbcType=VARCHAR},
+      needed_address = #{neededAddress,jdbcType=VARCHAR},
+      needed_phone = #{neededPhone,jdbcType=VARCHAR}
+    where needed_id = #{neededId,jdbcType=INTEGER}
+  </update>
+</mapper>

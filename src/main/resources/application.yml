@@ -1,0 +1,34 @@
+spring:
+  aop.proxy-target-class: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: Bst123456789
+    username: root
+    url: jdbc:mysql://123.207.110.102:3306/zb?useUnicode=true&characterEncoding=utf-8&useSSL=true&verifyServerCertificate=false
+
+  profiles:
+    include: redis
+
+  mail:
+        default-encoding: UTF-8
+        password: 1b1801527630a77dc1e47e83711eac084
+        username: postmaster@ss.vxnss.club
+        host: smtp.mailgun.org
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.lsjs.zb.pojo
+  config-location: classpath:mybatis/mybatis-config.xml
+
+#swagger 登录账号密码
+#security.basic.path: /swagger-ui.html
+#security.basic.enabled: true
+#security.user.name: bst
+#security.user.password: lansejishu
+
+
+server:
+  port: 8088
+logging:
+  level:
+    com.lsjs.zb: debug

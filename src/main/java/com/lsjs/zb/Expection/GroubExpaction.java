@@ -1,0 +1,99 @@
+package com.lsjs.zb.Expection;
+
+import com.lsjs.zb.common.IRespCode;
+import com.lsjs.zb.common.ResponseCode;
+import org.springframework.util.StringUtils;
+
+/**
+ * @author 杨红星
+ * @version 1.0.0
+ */
+
+
+public class GroubExpaction extends RuntimeException {
+
+    /**
+     * 错误代码
+     */
+    private String errorCode;
+
+    /**
+     * 错误代码接口
+     */
+    private IRespCode respCode;
+
+
+
+
+    public GroubExpaction() {
+        super();
+        errorCode = ResponseCode.ERROR.getCode();
+        respCode = ResponseCode.ERROR;
+    }
+
+
+    /**
+     * 添加构造方法
+     *
+     * @param respCode 错误代码枚举类型
+     */
+    public GroubExpaction(IRespCode respCode) {
+        super(respCode.getMessage());
+        this.errorCode = respCode.getCode();
+        this.respCode = respCode;
+    }
+    /**
+     * 构造方法
+     *
+     * @param respCode
+     *            错误代码
+     * @param message
+     *            默认消息
+     */
+    public GroubExpaction(IRespCode respCode, String message) {
+        super( !StringUtils.isEmpty(message) ? message : respCode.getMessage());
+        this.respCode = respCode;
+        this.errorCode = respCode.getCode();
+    }
+
+    public String getErrorCode()
+    {
+        if (respCode != null)
+        {
+            return respCode.getCode();
+        }
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode)
+    {
+        this.errorCode = errorCode;
+    }
+
+    public IRespCode getRespCode()
+    {
+        return respCode;
+    }
+
+    public void setRespCode(IRespCode respCode)
+    {
+        this.respCode = respCode;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder messageBuilder = new StringBuilder(getClass().getName());
+        messageBuilder.append(":");
+        if (respCode == null)
+        {
+            messageBuilder.append(this.errorCode);
+        }
+        else
+        {
+            messageBuilder.append(respCode.getCode()).append(":").append(respCode.name());
+        }
+        String message = getLocalizedMessage();
+        return !StringUtils.isEmpty(message) ? messageBuilder.append(":").append(message).toString() : messageBuilder
+                .toString();
+    }
+}
