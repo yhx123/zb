@@ -18,7 +18,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.lsjs.zb.pojo
-  config-location: classpath:mybatis/mybatis-config.xml
+#  config-location: com.lsjs.zb.config.MybatisConfig
 
 #swagger 登录账号密码
 #security.basic.path: /swagger-ui.html

@@ -64,7 +64,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private FollowingMapper followingMapper;
 
-
     @Autowired
     private ServeringServerMapper serveringServerMapper;
 
@@ -447,8 +446,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ServerResponse<PageInfo> getServerList(int userId, int page, int onePage) {
-        PageHelper.startPage(page, onePage);
+    public ServerResponse<PageInfo> getServerList(int userId, int pageNumber, int pageSize) {
+        PageHelper.startPage(pageNumber, pageSize);
         UserServerExample userServerExample = new UserServerExample();
         userServerExample.createCriteria().andUserIdEqualTo(userId);
         List<UserServer> userServers = userServerMapper.selectByExample(userServerExample);
@@ -456,7 +455,7 @@ public class UserServiceImpl implements UserService {
         for (UserServer userServer : userServers) {
             services.add(serverMapper.selectByPrimaryKey(userServer.getServerId()));
         }
-        PageInfo<Server> info = new PageInfo<>(services);
+        PageInfo info = new PageInfo(services);
         return ServerResponse.createBySuccess(info);
     }
 
@@ -470,7 +469,7 @@ public class UserServiceImpl implements UserService {
         for (UserNeed userNeed : userNeeds) {
             needs.add(needMapper.selectByPrimaryKey(userNeed.getNeedId()));
         }
-        PageInfo<Need> info = new PageInfo<>(needs);
+        PageInfo<Need> info = new PageInfo(needs);
         return ServerResponse.createBySuccess(info);
     }
 
