@@ -1,6 +1,6 @@
 /*
 SQLyog  v12.2.6 (64 bit)
-MySQL - 5.7.20-0ubuntu0.16.04.1 : Database - zb
+MySQL - 5.7.20-log : Database - zb
 *********************************************************************
 */
 
@@ -181,6 +181,34 @@ insert  into `needed_need`(`needed_id`,`need_id`,`user_id`,`needed_name`,`needed
 (906894,636712,598520,'杨红星','地大','18270313383'),
 (996491,636712,598520,'杨红星','地大','18270313383');
 
+/*Table structure for table `permission` */
+
+DROP TABLE IF EXISTS `permission`;
+
+CREATE TABLE `permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'permission权限id',
+  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'permission权限名称',
+  `description` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '描述',
+  `url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'url链接',
+  `method` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '方法',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `permission` */
+
+/*Table structure for table `permission_role` */
+
+DROP TABLE IF EXISTS `permission_role`;
+
+CREATE TABLE `permission_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'permission_role id',
+  `role_id` int(11) DEFAULT NULL COMMENT 'role_id',
+  `permission_id` int(11) DEFAULT NULL COMMENT 'permission_id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `permission_role` */
+
 /*Table structure for table `reply` */
 
 DROP TABLE IF EXISTS `reply`;
@@ -227,6 +255,31 @@ CREATE TABLE `report_server` (
 insert  into `report_server`(`server_id`,`user_id`,`report_status`,`server_message`,`create_time`) values 
 (971057,598520,2,'举报测试','2017-12-01 22:38:21'),
 (297110,598520,2,'，','2017-12-02 11:47:18');
+
+/*Table structure for table `role` */
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'role角色id',
+  `name` varchar(59) COLLATE utf8_unicode_ci NOT NULL COMMENT 'role角色名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `role` */
+
+/*Table structure for table `role_user` */
+
+DROP TABLE IF EXISTS `role_user`;
+
+CREATE TABLE `role_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户角色id',
+  `role_id` int(11) DEFAULT NULL COMMENT 'role角色id',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `role_user` */
 
 /*Table structure for table `server` */
 
@@ -300,16 +353,17 @@ CREATE TABLE `user` (
   `hobby` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '兴趣爱好',
   `speciality` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '特长',
   `user_img` varchar(225) COLLATE utf8_unicode_ci DEFAULT 'http://zhongbangapp.oss-cn-beijing.aliyuncs.com/defaultUserImage.png',
+  `user` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'normal' COMMENT '用户角色，normal普通用户，admin管理员',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `user` */
 
-insert  into `user`(`user_id`,`username`,`password`,`phone_number`,`mail`,`birthday`,`sex`,`job`,`hobby`,`speciality`,`user_img`) values 
-(179551,'redstar','53A93D61CF748399EC8BC6F59CAC7D79','18270313383',NULL,NULL,0,'程序猿','敲代码','头发特长','http://zhongbangapp.oss-cn-beijing.aliyuncs.com/4ada0d944a71f7e9442eba1e1b5c7e9c.png'),
-(283879,'唯有','53A93D61CF748399EC8BC6F59CAC7D79','15170334491',NULL,NULL,0,'教练','打篮球','运动','http://zhongbangapp.oss-cn-beijing.aliyuncs.com/0a78847a55b85ce9fb7df1b4eb5a30d9.png'),
-(450778,'超级马里奥','53A93D61CF748399EC8BC6F59CAC7D79','15679678525',NULL,NULL,1,'','','','http://zhongbangapp.oss-cn-beijing.aliyuncs.com/1f63a601a666f06e25beb5fe1fde14ef.png'),
-(598520,'你才码农','53A93D61CF748399EC8BC6F59CAC7D79','18679700741',NULL,NULL,0,'程序猿','科技，维修','维修，绘画','http://zhongbangapp.oss-cn-beijing.aliyuncs.com/609ae4461b18051cd6d9212938f67174.png');
+insert  into `user`(`user_id`,`username`,`password`,`phone_number`,`mail`,`birthday`,`sex`,`job`,`hobby`,`speciality`,`user_img`,`user`) values 
+(179551,'redstar','53A93D61CF748399EC8BC6F59CAC7D79','18270313383',NULL,NULL,0,'程序猿','敲代码','头发特长','http://zhongbangapp.oss-cn-beijing.aliyuncs.com/4ada0d944a71f7e9442eba1e1b5c7e9c.png','admin'),
+(283879,'唯有','53A93D61CF748399EC8BC6F59CAC7D79','15170334491',NULL,NULL,0,'教练','打篮球','运动','http://zhongbangapp.oss-cn-beijing.aliyuncs.com/0a78847a55b85ce9fb7df1b4eb5a30d9.png','normal'),
+(450778,'超级马里奥','53A93D61CF748399EC8BC6F59CAC7D79','15679678525',NULL,NULL,1,'','','','http://zhongbangapp.oss-cn-beijing.aliyuncs.com/1f63a601a666f06e25beb5fe1fde14ef.png','normal'),
+(598520,'你才码农','53A93D61CF748399EC8BC6F59CAC7D79','18679700741',NULL,NULL,0,'程序猿','科技，维修','维修，绘画','http://zhongbangapp.oss-cn-beijing.aliyuncs.com/609ae4461b18051cd6d9212938f67174.png','normal');
 
 /*Table structure for table `user_fans` */
 
@@ -364,6 +418,26 @@ insert  into `user_get_server`(`user_id`,`server_id`,`status`) values
 (598520,651675,1),
 (598520,465743,0),
 (598520,297110,0);
+
+/*Table structure for table `user_info` */
+
+DROP TABLE IF EXISTS `user_info`;
+
+CREATE TABLE `user_info` (
+  `uid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `salt` varchar(255) DEFAULT NULL,
+  `state` tinyint(4) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `user_info` */
+
+insert  into `user_info`(`uid`,`name`,`password`,`salt`,`state`,`username`) values 
+(1,'管理员','d3c59d25033dbf980d29554025c23a75','8d78869f470951332959580424d4bf4f',1,'admin'),
+(2,'测试','6a62cd4f0b80232f6a86070197841d00','237755f200a3bdfe716da0eae0b4d909',1,'test');
 
 /*Table structure for table `user_need` */
 

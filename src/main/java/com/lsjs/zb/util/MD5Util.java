@@ -1,6 +1,4 @@
-package com.lsjs.zb.service.impl;
-
-import com.lsjs.zb.util.PropertiesUtil;
+package com.lsjs.zb.util;
 
 import java.security.MessageDigest;
 

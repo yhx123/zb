@@ -1,7 +1,7 @@
 package com.lsjs.zb.config;
 
 
-import com.lsjs.zb.service.impl.MD5Util;
+import com.lsjs.zb.util.MD5Util;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

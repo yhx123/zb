@@ -9,7 +9,7 @@ import com.lsjs.zb.pojo.User;
 import com.lsjs.zb.pojo.param.LoginParam;
 import com.lsjs.zb.service.MailService;
 import com.lsjs.zb.service.UserService;
-import com.lsjs.zb.service.impl.JwtUserDetailsService;
+import com.lsjs.zb.config.JwtUserDetailsService;
 import com.lsjs.zb.util.SendMsgUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

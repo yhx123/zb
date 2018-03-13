@@ -69,13 +69,19 @@
         </javaClientGenerator>
 
 
-
-
-        <table tableName="user_get_need" domainObjectName="UserGetNeed" enableCountByExample="true"
+        <table tableName="role" domainObjectName="Role" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"/>
 
-        <table tableName="user_get_server" domainObjectName="UserGetServer" enableCountByExample="true"
+        <table tableName="permission" domainObjectName="Permission" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"/>
+
+        <table tableName="role_user" domainObjectName="RoleUser" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true"/>
+
+        <table tableName="permission_role" domainObjectName="PermissionRole" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"/>
     </context>

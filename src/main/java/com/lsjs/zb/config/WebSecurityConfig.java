@@ -42,7 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .addFilter(new JWTLoginFilter(authenticationManager()))
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                //关闭csrf，因为csrf的开启会和restful冲突
+                .csrf().disable();
         //以下这句就可以控制单个用户只能创建一个session，也就只能在服务器登录一次
         http.sessionManagement().maximumSessions(1).expiredUrl("/user/login");
     }

@@ -1,10 +1,10 @@
-package com.lsjs.zb.service.impl;
+package com.lsjs.zb.config;
 
-import com.lsjs.zb.dao.UserMapper;
-import com.lsjs.zb.pojo.User;
-import com.lsjs.zb.pojo.UserExample;
+import com.lsjs.zb.dao.*;
+import com.lsjs.zb.pojo.*;
 import com.lsjs.zb.util.RegularExpressionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Collections.emptyList;
 
 /**
  * @author 杨红星
@@ -24,6 +22,15 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private PermissionRoleMapper permissionRoleMapper;
+    @Autowired
+    private PermissionMapper permissionMapper;
+    @Autowired
+    private RoleUserMapper roleUserMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -43,14 +50,30 @@ public class JwtUserDetailsService implements UserDetailsService {
             userExample.createCriteria().andUsernameEqualTo(username);
             users = (ArrayList) userMapper.selectByExample(userExample);
         }
-        userExample.createCriteria().andUsernameEqualTo(username);
-        users = userMapper.selectByExample(userExample);
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        if (users.size() != 0) {
+            RoleExample roleExample = new RoleExample();
+            roleExample.createCriteria().andIdEqualTo(Integer.valueOf(users.get(0).getUserId()));
+            List<Role> roles = roleMapper.selectByExample(roleExample);
+            for (Role role : roles) {
+                PermissionRole permissionRole = permissionRoleMapper.selectByPrimaryKey(Integer.valueOf(role.getId()));
+                Permission permission = permissionMapper.selectByPrimaryKey(Integer.valueOf(permissionRole.getPermissionId()));
+                if (permission != null && permission.getName() != null) {
+                    GrantedAuthority grantedAuthority = new MyGrantedAuthority(permission.getUrl(), permission.getMethod());
+                    grantedAuthorities.add(grantedAuthority);
+                }
 
-        if (users.size() == 0) {
+            }
+        }
+        if (users.size() == 0)
+
+        {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
-        } else {
+        } else
+
+        {
             User user = users.get(0);
-            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), emptyList());
+            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
         }
     }
 }
