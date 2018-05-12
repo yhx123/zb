@@ -17,6 +17,10 @@ public class Constant {
     //redis默认失效时间
     public static final Long REDIS_DEFAULT_EXPIRE = 3600 * 1L;
 
+    /**
+     * 重复提交默认时间30000毫秒
+     */
+    public static final long AVOID_REPEATABLE_TIMEOUT = 30000 ;
 
     public interface Role {
         //普通用户

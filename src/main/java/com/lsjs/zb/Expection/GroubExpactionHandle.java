@@ -17,13 +17,8 @@ public class GroubExpactionHandle {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ServerResponse handle(Exception e) {
-        if (e instanceof GroubExpaction) {
             GroubExpaction groubExpaction = (GroubExpaction) e;
             return ServerResponse.createByErrorCodeMessage(Integer.valueOf(groubExpaction.getErrorCode()),groubExpaction.getMessage());
-        }else {
-            log.error("【系统异常】{}", e);
-            return ServerResponse.createByErrorCodeMessage(-1, "未知错误");
-        }
     }
 
 }
