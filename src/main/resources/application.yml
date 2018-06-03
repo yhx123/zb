@@ -29,6 +29,6 @@ mybatis:
 
 server:
   port: 8088
-logging:
-  level:
-    com.lsjs.zb: debug
+#logging:
+#  level:
+#    com.lsjs.zb: debug

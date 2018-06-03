@@ -3,7 +3,6 @@ package com.lsjs.zb.pojo;
 import java.util.Date;
 
 public class User {
-
     private Integer userId;
 
     private String username;
@@ -26,7 +25,9 @@ public class User {
 
     private String userImg;
 
-    public User(Integer userId, String username, String password, String phoneNumber, String mail, Date birthday, Integer sex, String job, String hobby, String speciality, String userImg) {
+    private Integer role;
+
+    public User(Integer userId, String username, String password, String phoneNumber, String mail, Date birthday, Integer sex, String job, String hobby, String speciality, String userImg, Integer role) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -38,6 +39,7 @@ public class User {
         this.hobby = hobby;
         this.speciality = speciality;
         this.userImg = userImg;
+        this.role = role;
     }
 
     public User() {
@@ -130,5 +132,13 @@ public class User {
 
     public void setUserImg(String userImg) {
         this.userImg = userImg == null ? null : userImg.trim();
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 }

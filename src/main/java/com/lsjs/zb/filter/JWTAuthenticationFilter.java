@@ -1,12 +1,13 @@
 package com.lsjs.zb.filter;
 
 import com.lsjs.zb.common.Constant;
-import com.lsjs.zb.util.JwtUtils;
+import com.lsjs.zb.util.JwtUtil;
+import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import io.jsonwebtoken.Jwts;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String header = request.getHeader(Constant.AUTH_KEY);
-        if (header == null || !header.startsWith(JwtUtils.getAuthorizationHeaderPrefix())) {
+        if (header == null || !header.startsWith(JwtUtil.getAuthorizationHeaderPrefix())) {
             chain.doFilter(request, response);
             return;
         }
@@ -38,7 +39,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken(String token) {
         String user = Jwts.parser()
                 .setSigningKey(Constant.SECRET)
-                .parseClaimsJws(token.replace(JwtUtils.getAuthorizationHeaderPrefix(), ""))
+                .parseClaimsJws(token.replace(JwtUtil.getAuthorizationHeaderPrefix(), ""))
                 .getBody()
                 .getSubject();
         if (null != user) {

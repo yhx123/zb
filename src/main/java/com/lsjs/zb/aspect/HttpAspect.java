@@ -31,17 +31,17 @@ public class HttpAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         // url
-        log.debug("url={}", request.getRequestURL());
+        log.info("url={}", request.getRequestURL());
         // port
-        log.debug("port={}", request.getRemotePort());
+        log.info("port={}", request.getRemotePort());
         // method
-        log.debug("method={}", request.getMethod());
+        log.info("method={}", request.getMethod());
         // ip
-        log.debug("ip={}", request.getRemoteAddr());
+        log.info("ip={}", request.getRemoteAddr());
         // class_method
-        log.debug("class_method={}", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        log.info("class_method={}", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
         // 参数
-        log.debug("args={}", Arrays.toString(joinPoint.getArgs()));
+        log.info("args={}", Arrays.toString(joinPoint.getArgs()));
     }
 
     @AfterReturning(returning = "object", pointcut = "log()")

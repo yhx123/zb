@@ -7,7 +7,7 @@ import com.lsjs.zb.common.ServerResponse;
 import com.lsjs.zb.pojo.User;
 import com.lsjs.zb.pojo.param.LoginParam;
 import com.lsjs.zb.service.UserService;
-import com.lsjs.zb.util.JwtUtils;
+import com.lsjs.zb.util.JwtUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +73,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                 .setExpiration(new Date(System.currentTimeMillis() + Constant.JWT_EXPIRE)) //失效时间
                 .signWith(SignatureAlgorithm.HS512, Constant.SECRET)
                 .compact();
-        response.addHeader(Constant.AUTH_KEY, JwtUtils.getTokenHeader(token));
+        response.addHeader(Constant.AUTH_KEY, JwtUtil.getTokenHeader(token));
         LoginParam user = new ObjectMapper()
                 .readValue(request.getInputStream(), LoginParam.class);
         ServerResponse<User> login = userService.login(user.getUsername(), user.getPassword());

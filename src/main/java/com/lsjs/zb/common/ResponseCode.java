@@ -7,7 +7,10 @@ package com.lsjs.zb.common;
 public enum ResponseCode implements IRespCode {
     SUCCESS("0", "SUCCESS"),
     ERROR("1","ERROR"),
-    NEED_LOGIN("10","NEED_LOGIN");
+    NEED_LOGIN("10","NEED_LOGIN"),
+    SQL_ERROR("1001", "sql执行异常"),
+    TOKEN_ERROR("1002", "token错误或者已经失效"),
+    PERMISSIONS_ERRO("1003", "权限不足");
 
     private  String code;
     private   String desc;

@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 public class GroubExpactionHandle {
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = GroubExpaction.class)
     @ResponseBody
-    public ServerResponse handle(Exception e) {
-            GroubExpaction groubExpaction = (GroubExpaction) e;
-            return ServerResponse.createByErrorCodeMessage(Integer.valueOf(groubExpaction.getErrorCode()),groubExpaction.getMessage());
+    public ServerResponse handle(GroubExpaction e) {
+
+            return ServerResponse.createByErrorCodeMessage(Integer.valueOf(e.getErrorCode()),e.getMessage());
     }
 
 }

@@ -8,5 +8,5 @@
          2、
     -->
     <!-- 这一句至关重要如果没有，就无法输出sql语句 -->
-    <logger name="com.advsun.netty.dao" level="DEBUG"></logger>
+    <logger name="com.lsjs.zb.dao" level="DEBUG"></logger>
 </configuration>

@@ -3,11 +3,14 @@ package com.lsjs.zb.pojo;
 public class Role {
     private Integer id;
 
-    private String name;
+    private Integer name;
 
-    public Role(Integer id, String name) {
+    private String description;
+
+    public Role(Integer id, Integer name, String description) {
         this.id = id;
         this.name = name;
+        this.description = description;
     }
 
     public Role() {
@@ -22,11 +25,19 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
+    public Integer getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setName(Integer name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

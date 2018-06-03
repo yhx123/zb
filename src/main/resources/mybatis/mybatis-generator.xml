@@ -72,18 +72,22 @@
         <table tableName="role" domainObjectName="Role" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"/>
-
-        <table tableName="permission" domainObjectName="Permission" enableCountByExample="true"
+        <table tableName="user" domainObjectName="User" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"/>
 
-        <table tableName="role_user" domainObjectName="RoleUser" enableCountByExample="true"
-               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
+        <!--<table tableName="permission" domainObjectName="Permission" enableCountByExample="true"-->
+               <!--enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true"/>-->
 
-        <table tableName="permission_role" domainObjectName="PermissionRole" enableCountByExample="true"
-               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"
-               selectByExampleQueryId="true"/>
+        <!--<table tableName="role_user" domainObjectName="RoleUser" enableCountByExample="true"-->
+               <!--enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true"/>-->
+
+        <!--<table tableName="permission_role" domainObjectName="PermissionRole" enableCountByExample="true"-->
+               <!--enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true"/>-->
+
     </context>
 
 </generatorConfiguration>
